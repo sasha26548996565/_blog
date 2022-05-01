@@ -21,4 +21,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Post::class, 'post_user_likes', 'user_id', 'post_id');
     }
+
+    public function posts(): Relation
+    {
+        return $this->hasMany(Post::class, 'user_id', 'id');
+    }
 }

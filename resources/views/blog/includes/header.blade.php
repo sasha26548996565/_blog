@@ -10,9 +10,22 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('blog.index') }}">BLOG</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
+
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">register</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">login</a>
+                    </li>
+                @endguest
+
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}">logout</a>
+                    </li>
+                @endauth
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

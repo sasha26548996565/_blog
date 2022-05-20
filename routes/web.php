@@ -9,6 +9,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
         Route::name('post.')->prefix('post')->group(function () {
             Route::get('/{post}', 'PostController@show')->name('show');
+
+        });
+
+        Route::name('comment.')->prefix('comment')->group(function () {
+            Route::post('/{post}', 'CommentController@store')->name('store');
         });
     });
 });

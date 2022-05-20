@@ -17,4 +17,21 @@
             @endforeach
         </div>
     </div>
+
+    <h2>Comments: {{ $post->comments->count() }}</h2>
+
+    <form action="{{ route('blog.comment.store', $post->id) }}" method="POST" class="d-flex" style="max-width: 500px; margin-bottom: 30px;">
+        @csrf
+
+
+        <input type="text" name="text" required placeholder="input text" class="form-control me-2">
+        <input type="submit" class="btn btn-outline-secondary">
+
+    </form>
+
+    @foreach ($post->comments as $comment)
+        <p>{{ $comment->user->email }}</p>
+        <p>{{ $comment->text }}</p>
+        <hr>
+    @endforeach
 @endsection

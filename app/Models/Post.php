@@ -27,7 +27,7 @@ class Post extends Model
 
     public function comments(): Relation
     {
-        return $this->hasMany(Comment::class, 'post_id', 'id');
+        return $this->hasMany(Comment::class, 'post_id', 'id')->orderBy('id', 'DESC');
     }
 
     public function user(): Relation

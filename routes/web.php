@@ -8,13 +8,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::get('/', IndexController::class)->name('index');
 
         Route::name('post.')->prefix('post')->group(function () {
-            Route::get('/{post}', 'PostController@show')->name('show');
-
+            Route::get('post/{post}', 'PostController@show')->name('show');
+            Route::get('search', 'PostController@search')->name('search');
         });
 
-        Route::name('comment.')->prefix('comment')->group(function () {
-            Route::post('/{post}', 'CommentController@store')->name('store');
-        });
+        Route::post('comment/{post}', 'CommentController@store')->name('comment.store');
     });
 });
 

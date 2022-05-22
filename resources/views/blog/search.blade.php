@@ -1,6 +1,7 @@
 @extends('layouts.blog')
 
 @section('content')
+    <h1>Result: {{ $posts->total() }}</h1>
     @foreach ($posts as $post)
         <div class="card mt-3">
             <img src="..." class="card-img-top" alt="{{ $post->title }}">
@@ -21,5 +22,5 @@
         </div>
     @endforeach
 
-    {{ $posts->links('vendor.pagination.bootstrap-5') }}
+    {{ $posts->withQueryString()->links('vendor.pagination.bootstrap-5') }}
 @endsection

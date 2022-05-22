@@ -10,6 +10,8 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::name('post.')->prefix('post')->group(function () {
             Route::get('post/{post}', 'PostController@show')->name('show');
             Route::get('search', 'PostController@search')->name('search');
+            Route::get('tag/{tag}', 'PostController@postsByTag')->name('tag');
+            Route::get('category/{category}', 'PostController@postsByCategory')->name('category');
         });
 
         Route::post('comment/{post}', 'CommentController@store')->name('comment.store');

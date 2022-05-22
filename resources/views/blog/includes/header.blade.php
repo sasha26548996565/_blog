@@ -27,16 +27,8 @@
                     </li>
                 @endauth
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        catagories
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @foreach ($categories as $category)
-                            <li><a class="dropdown-item" href="#">{{ $category->title }}</a></li>
-                        @endforeach
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="">личный кабинет</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -45,8 +37,20 @@
                         catagories
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @foreach ($categories as $category)
+                            <li><a class="dropdown-item" href="{{ route('blog.post.category', $category->id) }}">{{ $category->title }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        tags
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @foreach ($tags as $tag)
-                            <li><a class="dropdown-item" href="#">{{ $tag->title }}</a></li>
+                            <li><a class="dropdown-item" href="{{ route('blog.post.tag', $tag->id) }}">{{ $tag->title }}</a></li>
                         @endforeach
                     </ul>
                 </li>

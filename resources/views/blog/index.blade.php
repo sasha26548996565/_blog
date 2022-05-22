@@ -1,6 +1,7 @@
 @extends('layouts.blog')
 
 @section('content')
+    <h1><a href="{{ route('blog.post.create') }}">добавить пост</a></h1>
     @foreach ($posts as $post)
         <div class="card mt-3">
             <img src="..." class="card-img-top" alt="{{ $post->title }}">

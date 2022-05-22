@@ -6,10 +6,12 @@ use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Blog\Post\StoreRequest;
 
 class PostController extends Controller
 {
@@ -51,5 +53,17 @@ class PostController extends Controller
         Auth::user()->likedPosts()->toggle($post->id);
 
         return to_route('blog.post.show', $post->id);
+    }
+
+    public function create(): View
+    {
+        return view('blog.post.create');
+    }
+
+    public function store(StoreRequest $request): RedirectResponse
+    {
+
+
+        return to_route('blog.index');
     }
 }

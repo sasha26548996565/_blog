@@ -13,5 +13,8 @@ class ComposerServiceProvider extends ServiceProvider
     {
         View::composer('blog.includes.header', TagComposer::class);
         View::composer('blog.includes.header', CategoryComposer::class);
+
+        View::composer('blog.post.create', TagComposer::class);
+        View::composer('blog.post.create', CategoryComposer::class);
     }
 }

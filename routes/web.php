@@ -12,6 +12,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
             Route::get('search', 'PostController@search')->name('search');
             Route::get('tag/{tag}', 'PostController@postsByTag')->name('tag');
             Route::get('category/{category}', 'PostController@postsByCategory')->name('category');
+            Route::post('post/like/{post}', 'PostController@like')->name('like');
         });
 
         Route::post('comment/{post}', 'CommentController@store')->name('comment.store');

@@ -6,6 +6,17 @@
         <div class="card-body">
             <h5 class="card-title">{{ $post->title }}</h5>
             <p class="card-text">{{ $post->text }}</p>
+
+            <form action="{{ route('blog.post.like', $post->id) }}" method="POST">
+                @csrf
+
+                @if (auth()->user()->checkLike($post->id))
+                    <input type="submit" class="btn btn-success" value="liked">
+                @else
+                    <input type="submit" class="btn btn-danger" value="like it">
+                @endif
+            </form>
+
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">CATEGORY: {{ $post->category->title }}</li>

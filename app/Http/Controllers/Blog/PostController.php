@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Blog;
 
 use App\Models\Tag;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -42,5 +44,12 @@ class PostController extends Controller
         $posts = $category->posts()->paginate($this->paginateCount);
 
         return view('blog.post.category', ['posts' => $posts, 'categoryName' => $category->title]);
+    }
+
+    public function like(Post $post): RedirectResponse
+    {
+        Auth::user()->likedPosts()->toggle($post->id);
+
+        return to_route('blog.post.show', $post->id);
     }
 }

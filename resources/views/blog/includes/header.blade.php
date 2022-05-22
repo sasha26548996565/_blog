@@ -25,11 +25,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">logout</a>
                     </li>
-                @endauth
 
-                <li class="nav-item">
-                    <a class="nav-link" href="">личный кабинет</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('blog.personal.index') }}">личный кабинет</a>
+                    </li>
+                @endauth
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

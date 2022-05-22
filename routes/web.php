@@ -16,6 +16,18 @@ Route::namespace('App\Http\Controllers')->group(function () {
         });
 
         Route::post('comment/{post}', 'CommentController@store')->name('comment.store');
+
+        Route::name('personal.')->prefix('personal')->namespace('Personal')->group(function () {
+            Route::get('/', IndexController::class)->name('index');
+
+            Route::name('likedPosts.')->prefix('liked-posts')->group(function () {
+                Route::get('', 'LikedPostsController@index')->name('index');
+            });
+
+            Route::name('comment.')->prefix('comment')->group(function () {
+                Route::get('/', 'CommentController@index')->name('index');
+            });
+        });
     });
 });
 

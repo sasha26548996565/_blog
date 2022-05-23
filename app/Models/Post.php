@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
@@ -33,5 +34,14 @@ class Post extends Model
     public function user(): Relation
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::saving(function ($post) {
+            $post->user_id = Auth::user()->id;
+        });
     }
 }

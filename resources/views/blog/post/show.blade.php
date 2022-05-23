@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="card mt-3">
-        <img src="..." class="card-img-top" alt="{{ $post->title }}">
+        <img src="{{ asset('storage/'. $post->image) }}" class="card-img-top" style="max-width: 700px;" alt="{{ $post->title }}">
         <div class="card-body">
+            <h6>{{ $post->user->email }}</h6>
             <h5 class="card-title">{{ $post->title }}</h5>
             <p class="card-text">{{ $post->text }}</p>
 

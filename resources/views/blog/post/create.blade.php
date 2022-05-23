@@ -3,7 +3,7 @@
 @section('content')
     <h1>post create</h1>
 
-    <form action="{{ route('blog.post.store') }}" method="POST">
+    <form action="{{ route('blog.post.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">
@@ -52,6 +52,10 @@
             @error('tags')
                 {{ $message }}
             @enderror
+        </div>
+
+        <div class="form-group">
+            <input type="file" name="image" class="form-control">
         </div>
 
         <div class="form-group">

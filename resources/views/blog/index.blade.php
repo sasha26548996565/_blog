@@ -4,7 +4,7 @@
     <h1><a href="{{ route('blog.post.create') }}">добавить пост</a></h1>
     @foreach ($posts as $post)
         <div class="card mt-3">
-            <img src="..." class="card-img-top" alt="{{ $post->title }}">
+            <img src="{{ asset('storage/'. $post->image) }}" class="card-img-top" style="max-width: 700px;" alt="{{ $post->title }}">
             <div class="card-body">
                 <h5 class="card-title">{{ $post->title }}</h5>
                 <p class="card-text">{{ Str::limit($post->text, 50) }}</p>

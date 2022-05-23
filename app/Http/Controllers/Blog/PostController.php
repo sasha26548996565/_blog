@@ -12,10 +12,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Blog\Post\StoreRequest;
+use App\Actions\Blog\Post\StoreAction;
 
 class PostController extends Controller
 {
     private int $paginateCount = 10;
+    private StoreAction $storeAction;
+
+    public function __construct(StoreAction $storeAction)
+    {
+        $this->storeAction = $storeAction;
+    }
 
     public function show(Post $post): View
     {
@@ -63,6 +70,7 @@ class PostController extends Controller
     public function store(StoreRequest $request): RedirectResponse
     {
 
+        $this->storeAction->store($request->validated());
 
         return to_route('blog.index');
     }

@@ -69,7 +69,6 @@ class PostController extends Controller
 
     public function store(StoreRequest $request): RedirectResponse
     {
-
         $this->storeAction->store($request->validated());
 
         return to_route('blog.index');

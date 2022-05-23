@@ -1,7 +1,10 @@
 @extends('layouts.blog')
 
 @section('content')
-    <h1><a href="{{ route('blog.post.create') }}">добавить пост</a></h1>
+    @auth
+        <h1><a href="{{ route('blog.post.create') }}">добавить пост</a></h1>
+    @endauth
+
     @foreach ($posts as $post)
         <div class="card mt-3">
             <img src="{{ asset('storage/'. $post->image) }}" class="card-img-top" style="max-width: 700px;" alt="{{ $post->title }}">

@@ -10,7 +10,9 @@ class StoreAction
 {
     public function store(array $data): void
     {
-
+        try
+        {
+            DB::beginTransaction();
 
             $data['image'] = Storage::disk('public')->put('/images', $data['image']);
 
@@ -20,6 +22,11 @@ class StoreAction
             $post = Post::create($data);
             $post->tags()->attach($tags);
 
-
+            DB::commit();
+        } catch (\Exception $exception)
+        {
+            DB::rollback();
+            abort(500);
+        }
     }
 }

@@ -27,7 +27,7 @@
                 <option selected>choose category</option>
 
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" {{ $category->id == old('category_id') ? 'selected' : '' }}>
+                    <option value="{{ $category->id }}" @selected($category->id == old('category_id'))>
                         {{ $category->title }}</option>
                 @endforeach
             </select>
@@ -43,8 +43,7 @@
 
                 @foreach ($tags as $tag)
                     <option value="{{ $tag->id }}"
-                        {{
-                            is_array(old('tags')) && in_array($tag->id, old('tags')) ? 'selected' : '' }}
+                        @selected(is_array(old('tags')) && in_array($tag->id, old('tags')))
                         >{{ $tag->title }}</option>
                 @endforeach
             </select>

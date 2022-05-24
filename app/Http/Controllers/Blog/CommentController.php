@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Blog;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Blog\Comment\StoreRequest;
 

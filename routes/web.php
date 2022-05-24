@@ -28,6 +28,8 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
             Route::name('comment.')->prefix('comment')->group(function () {
                 Route::get('/', 'CommentController@index')->name('index');
+                Route::get('/edit/{comment}', 'CommentController@edit')->name('edit');
+                Route::patch('/{comment}', 'CommentController@update')->name('update');
             });
         });
     });

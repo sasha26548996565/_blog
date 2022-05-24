@@ -30,7 +30,7 @@
                         <a class="nav-link" href="{{ route('blog.personal.index') }}">личный кабинет</a>
                     </li>
 
-                    @can('admin', auth()->user())
+                    @can('admin')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.index') }}">admin</a>
                         </li>

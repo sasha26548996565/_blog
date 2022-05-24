@@ -27,5 +27,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('admin', [UserPolicy::class, 'viewAdmin']);
+        Gate::define('update-post', [UserPolicy::class, 'updatePost']);
     }
 }

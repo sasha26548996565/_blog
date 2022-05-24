@@ -8,6 +8,13 @@
     @foreach ($posts as $post)
         <div class="card mt-3">
             <img src="{{ asset('storage/'. $post->image) }}" class="card-img-top" style="max-width: 700px;" alt="{{ $post->title }}">
+
+            @can('update-post')
+                <div class="card-header">
+                    <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-warning">edit post</a>
+                </div>
+            @endcan
+
             <div class="card-body">
                 <h5 class="card-title">{{ $post->title }}</h5>
                 <p class="card-text">{{ Str::limit($post->text, 50) }}</p>

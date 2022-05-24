@@ -41,6 +41,8 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
         Route::prefix('post')->name('post.')->group(function () {
             Route::get('/', 'PostController@index')->name('index');
+            Route::get('/{post}', 'PostController@edit')->name('edit');
+            Route::patch('/{post}', 'PostController@update')->name('update');
         });
     });
 });

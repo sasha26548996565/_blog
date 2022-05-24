@@ -31,6 +31,10 @@ Route::namespace('App\Http\Controllers')->group(function () {
             });
         });
     });
+
+    Route::middleware('role:admin')->name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
+        Route::get('/', IndexController::class)->name('index');
+    });
 });
 
 Auth::routes();

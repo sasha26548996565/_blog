@@ -29,6 +29,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('blog.personal.index') }}">личный кабинет</a>
                     </li>
+
+                    @can('admin', auth()->user())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.index') }}">admin</a>
+                        </li>
+                    @endcan
                 @endauth
 
                 <li class="nav-item dropdown">

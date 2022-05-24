@@ -30,12 +30,18 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::get('/', 'CommentController@index')->name('index');
                 Route::get('/edit/{comment}', 'CommentController@edit')->name('edit');
                 Route::patch('/{comment}', 'CommentController@update')->name('update');
+                Route::delete('/{comment}', 'CommentController@destroy')->name('destroy');
+                Route::post('/{comment}', 'CommentController@restore')->name('restore');
             });
         });
     });
 
     Route::middleware('role:admin')->name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
         Route::get('/', IndexController::class)->name('index');
+
+        Route::prefix('post')->name('post.')->group(function () {
+            Route::get('/', 'PostController@index')->name('index');
+        });
     });
 });
 

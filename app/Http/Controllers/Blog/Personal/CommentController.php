@@ -15,7 +15,7 @@ class CommentController extends Controller
 {
     public function index(): View
     {
-        $comments = Auth::user()->comments()->paginate(10);
+        $comments = Auth::user()->comments()->withTrashed()->paginate(10);
 
         return view('blog.personal.comment.index', compact(nameof($comments)));
     }
@@ -28,6 +28,20 @@ class CommentController extends Controller
     public function update(UpdateRequest $request, Comment $comment): RedirectResponse
     {
         $comment->update($request->validated());
+
+        return to_route('blog.personal.comment.index');
+    }
+
+    public function destroy(Comment $comment): RedirectResponse
+    {
+        $comment->delete();
+
+        return to_route('blog.personal.comment.index');
+    }
+
+    public function restore(int $commentId): RedirectResponse
+    {
+        Comment::withTrashed()->findOrFail($commentId)->restore();
 
         return to_route('blog.personal.comment.index');
     }

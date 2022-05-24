@@ -34,4 +34,9 @@ class Comment extends Model
             $comment->user_id = Auth::user()->id;
         });
     }
+
+    public function isDeleted(): bool
+    {
+        return $this->deleted_at == null ? false : true;
+    }
 }

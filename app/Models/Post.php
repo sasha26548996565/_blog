@@ -44,4 +44,9 @@ class Post extends Model
             $post->user_id = Auth::user()->id;
         });
     }
+
+    public function isDeleted(): bool
+    {
+        return $this->deleted_at == null ? false : true;
+    }
 }

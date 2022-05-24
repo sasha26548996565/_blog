@@ -2,18 +2,35 @@
 
 @section('content')
     @auth
-        <h1><a href="">добавить пост</a></h1>
+        <h1><a href="{{ route('admin.post.create') }}">добавить пост</a></h1>
     @endauth
 
     @foreach ($posts as $post)
         <div class="card mt-3">
             <img src="{{ asset('storage/'. $post->image) }}" class="card-img-top" style="max-width: 700px;" alt="{{ $post->title }}">
 
-            @can('update-post')
-                <div class="card-header">
+            <div class="card-header">
+                @can('update-post')
                     <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-warning">edit post</a>
-                </div>
-            @endcan
+                @endcan
+
+                @can('delete-post')
+                    @if ($post->isDeleted())
+                        <form action="{{ route('admin.post.restore', $post->id) }}" method="POST">
+                            @csrf
+
+                            <input type="submit" class="btn btn-secondary" value="restore">
+                        </form>
+                    @else
+                        <form action="{{ route('admin.post.destroy', $post->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <input type="submit" class="btn btn-danger" value="delete">
+                        </form>
+                    @endif
+                @endcan
+            </div>
 
             <div class="card-body">
                 <h5 class="card-title">{{ $post->title }}</h5>

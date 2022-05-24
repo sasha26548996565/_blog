@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Blog\Post\StoreRequest;
-use App\Actions\Blog\Post\StoreAction;
+use App\Actions\Post\StoreAction;
 
 class PostController extends Controller
 {

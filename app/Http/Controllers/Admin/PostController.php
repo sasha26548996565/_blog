@@ -4,27 +4,44 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Post\StoreAction;
 use App\Models\Post;
+use App\Actions\Post\UpdateAction;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use App\Actions\Admin\Post\UpdateAction;
+use App\Http\Requests\Blog\Post\StoreRequest;
 use App\Http\Requests\Admin\Post\UpdateRequest;
 
 class PostController extends Controller
 {
+    private const PAGINATION_COUNT = 10;
+    private StoreAction $storeAction;
     private UpdateAction $updateAction;
 
-    public function __construct(UpdateAction $updateAction)
+    public function __construct(StoreAction $storeAction, UpdateAction $updateAction)
     {
+        $this->storeAction = $storeAction;
         $this->updateAction = $updateAction;
     }
 
     public function index(): View
     {
-        $posts = Post::latest()->paginate(10);
+        $posts = Post::withTrashed()->latest()->paginate(self::PAGINATION_COUNT);
 
         return view('admin.post.index', compact(nameof($posts)));
+    }
+
+    public function create(): View
+    {
+        return view('admin.post.create');
+    }
+
+    public function store(StoreRequest $request): RedirectResponse
+    {
+        $this->storeAction->handle($request->validated());
+
+        return to_route('admin.post.index');
     }
 
     public function edit(Post $post): View
@@ -35,6 +52,20 @@ class PostController extends Controller
     public function update(UpdateRequest $request, Post $post): RedirectResponse
     {
         $this->updateAction->handle($request->validated(), $post);
+
+        return to_route('admin.post.index');
+    }
+
+    public function destroy(Post $post): RedirectResponse
+    {
+        $post->delete();
+
+        return to_route('admin.post.index');
+    }
+
+    public function restore(int $postId): RedirectResponse
+    {
+        Post::withTrashed()->findOrFail($postId)->restore();
 
         return to_route('admin.post.index');
     }

@@ -41,8 +41,12 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
         Route::prefix('post')->name('post.')->group(function () {
             Route::get('/', 'PostController@index')->name('index');
+            Route::get('/create', 'PostController@create')->name('create');
+            Route::post('/store', 'PostController@store')->name('store');
             Route::get('/{post}', 'PostController@edit')->name('edit');
             Route::patch('/{post}', 'PostController@update')->name('update');
+            Route::delete('/destroy/{post}', 'PostController@destroy')->name('destroy');
+            Route::post('/restore/{post}', 'PostController@restore')->name('restore');
         });
     });
 });

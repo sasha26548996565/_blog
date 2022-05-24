@@ -28,5 +28,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('admin', [UserPolicy::class, 'viewAdmin']);
         Gate::define('update-post', [UserPolicy::class, 'updatePost']);
+        Gate::define('delete-post', [UserPolicy::class, 'deletePost']);
     }
 }

@@ -20,4 +20,9 @@ class UserPolicy
     {
         return $user->hasPermissionTo(User::EDIT_PERMISSION);
     }
+
+    public function deletePost(User $user): bool
+    {
+        return $user->hasPermissionTo(User::DELETE_PERMISSION);
+    }
 }

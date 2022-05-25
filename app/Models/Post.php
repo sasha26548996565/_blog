@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class Post extends Model
 {
     use HasFactory, SoftDeletes;
+    use Filterable;
 
     protected $guarded = [];
 

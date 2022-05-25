@@ -46,7 +46,8 @@ class PostController extends Controller
     {
         $posts = $tag->posts()->paginate($this->paginateCount);
 
-        return view('blog.post.tag', ['posts' => $posts, 'tagName' => $tag->title]);
+        return view('blog.post.tag', compact([nameof($posts),
+            nameof($tag)]));
     }
 
     public function postsByCategory(Category $category): View

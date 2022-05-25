@@ -1,7 +1,7 @@
 @extends('layouts.blog')
 
 @section('content')
-    <h1>Tag: {{ $tagName }}</h1>
+    <h1>Tag: {{ $tag->title }}</h1>
 
     @foreach ($posts as $post)
         <div class="card mt-3">

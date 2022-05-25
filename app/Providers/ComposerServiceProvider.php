@@ -22,5 +22,8 @@ class ComposerServiceProvider extends ServiceProvider
 
         View::composer('admin.post.create', TagComposer::class);
         View::composer('admin.post.create', CategoryComposer::class);
+
+        View::composer('admin.post.index', TagComposer::class);
+        View::composer('admin.post.index', CategoryComposer::class);
     }
 }

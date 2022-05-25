@@ -9,9 +9,11 @@ use App\Models\Post;
 use App\Actions\Post\UpdateAction;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use App\Http\Filters\PostFilter;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Blog\Post\StoreRequest;
 use App\Http\Requests\Admin\Post\UpdateRequest;
+use App\Http\Requests\Post\FilterRequest;
 
 class PostController extends Controller
 {
@@ -25,9 +27,11 @@ class PostController extends Controller
         $this->updateAction = $updateAction;
     }
 
-    public function index(): View
+    public function index(FilterRequest $request): View
     {
-        $posts = Post::withTrashed()->latest()->paginate(self::PAGINATION_COUNT);
+        $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($request->validated())]);
+
+        $posts = Post::withTrashed()->filter($filter)->latest()->paginate(self::PAGINATION_COUNT);
 
         return view('admin.post.index', compact(nameof($posts)));
     }

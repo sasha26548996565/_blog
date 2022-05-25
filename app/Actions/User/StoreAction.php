@@ -2,10 +2,12 @@
 
 namespace App\Actions\User;
 
+use App\Mail\User\PasswordMail;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class StoreAction
 {
@@ -31,6 +33,7 @@ class StoreAction
             $user->assignRole($role);
 
             isset($permissions) ? $user->givePermissionTo($permissions) : null;
+            Mail::to($data['email'])->send(new PasswordMail($password));
 
             DB::commit();
         } catch (\Exception $exception)

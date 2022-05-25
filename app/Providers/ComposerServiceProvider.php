@@ -9,21 +9,14 @@ use Illuminate\Support\ServiceProvider;
 
 class ComposerServiceProvider extends ServiceProvider
 {
+    private array $bladeFiles = ['blog.includes.header', 'blog.post.create', 'admin.post.edit', 'admin.post.create', 'admin.post.index'];
+
     public function register()
     {
-        View::composer('blog.includes.header', TagComposer::class);
-        View::composer('blog.includes.header', CategoryComposer::class);
-
-        View::composer('blog.post.create', TagComposer::class);
-        View::composer('blog.post.create', CategoryComposer::class);
-
-        View::composer('admin.post.edit', TagComposer::class);
-        View::composer('admin.post.edit', CategoryComposer::class);
-
-        View::composer('admin.post.create', TagComposer::class);
-        View::composer('admin.post.create', CategoryComposer::class);
-
-        View::composer('admin.post.index', TagComposer::class);
-        View::composer('admin.post.index', CategoryComposer::class);
+        foreach ($this->bladeFiles as $file)
+        {
+            View::composer($file, TagComposer::class);
+            View::composer($file, CategoryComposer::class);
+        }
     }
 }

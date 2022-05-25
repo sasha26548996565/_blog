@@ -48,6 +48,12 @@ Route::namespace('App\Http\Controllers')->group(function () {
             Route::delete('/destroy/{post}', 'PostController@destroy')->name('destroy');
             Route::post('/restore/{post}', 'PostController@restore')->name('restore');
         });
+
+        Route::prefix('user')->name('user.')->group(function () {
+            Route::get('/', 'UserController@index')->name('index');
+            Route::get('/create', 'UserController@create')->name('create');
+            Route::post('/store/user', 'UserController@store')->name('store');
+        });
     });
 });
 

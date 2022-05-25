@@ -4,7 +4,6 @@ namespace App\ViewComposers;
 
 use App\Models\Category;
 use Illuminate\Contracts\View\View;
-use App\Contracts\ComposerContract;
 
 class CategoryComposer implements ComposerContract
 {

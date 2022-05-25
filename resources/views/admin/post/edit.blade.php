@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>post create</h1>
+    <h1>post update</h1>
 
     <form action="{{ route('admin.post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
         @csrf

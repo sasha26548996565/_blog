@@ -4,6 +4,7 @@ namespace App\Actions\User;
 
 use App\Mail\User\PasswordMail;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -33,7 +34,9 @@ class StoreAction
             $user->assignRole($role);
 
             isset($permissions) ? $user->givePermissionTo($permissions) : null;
+
             Mail::to($data['email'])->send(new PasswordMail($password));
+            event(new Registered($user));
 
             DB::commit();
         } catch (\Exception $exception)

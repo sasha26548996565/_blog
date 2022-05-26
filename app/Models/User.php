@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use App\Notifications\SendVerifyNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles, SoftDeletes;
@@ -39,6 +42,11 @@ class User extends Authenticatable
     public function comments(): Relation
     {
         return $this->hasMany(Comment::class, 'user_id', 'id');
+    }
+
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify(new SendVerifyNotification());
     }
 
     public function checkLike(int $postId): bool

@@ -36,7 +36,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
         });
     });
 
-    Route::middleware('role:admin')->name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
+    Route::middleware(['auth', 'verified', 'role:admin'])->name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
         Route::get('/', IndexController::class)->name('index');
 
         Route::prefix('post')->name('post.')->group(function () {
@@ -57,6 +57,6 @@ Route::namespace('App\Http\Controllers')->group(function () {
     });
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

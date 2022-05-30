@@ -11,17 +11,22 @@ use App\ViewComposers\PermissionComposer;
 
 class ComposerServiceProvider extends ServiceProvider
 {
-    private array $bladeFiles = ['blog.includes.header', 'blog.post.create', 'admin.post.edit', 'admin.post.create', 'admin.post.index'];
+    private array $bladeFilesForTagAndCategories = ['blog.includes.header', 'blog.post.create', 'admin.post.edit',
+        'admin.post.create', 'admin.post.index'];
+    private array $bladeFilesForRolesAndPermissions = ['admin.user.create', 'admin.user.index'];
 
     public function register()
     {
-        foreach ($this->bladeFiles as $file)
+        foreach ($this->bladeFilesForTagAndCategories as $file)
         {
             View::composer($file, TagComposer::class);
             View::composer($file, CategoryComposer::class);
         }
 
-        View::composer('admin.user.create', RoleComposer::class);
-        View::composer('admin.user.create', PermissionComposer::class);
+        foreach ($this->bladeFilesForRolesAndPermissions as $file)
+        {
+            View::composer($file, RoleComposer::class);
+            View::composer($file, PermissionComposer::class);
+        }
     }
 }

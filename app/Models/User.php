@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Traits\Filterable;
 use App\Notifications\SendVerifyNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Spatie\Permission\Traits\HasRoles;
@@ -17,7 +18,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles, SoftDeletes;
+    use HasRoles, SoftDeletes, Filterable;
 
     protected $fillable = ['name', 'email', 'password'];
     protected $hidden = ['password', 'remember_token'];
@@ -52,5 +53,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function checkLike(int $postId): bool
     {
         return $this->likedPosts->contains($postId);
+    }
+
+    public function isDeleted(): bool
+    {
+        return $this->deleted_at == null ? false : true;
     }
 }

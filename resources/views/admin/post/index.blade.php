@@ -43,11 +43,11 @@
             <img src="{{ asset('storage/'. $post->image) }}" class="card-img-top" style="max-width: 700px;" alt="{{ $post->title }}">
 
             <div class="card-header">
-                @can('update-post')
+                @can('update')
                     <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-warning">edit post</a>
                 @endcan
 
-                @can('delete-post')
+                @can('delete')
                     @if ($post->isDeleted())
                         <form action="{{ route('admin.post.restore', $post->id) }}" method="POST">
                             @csrf

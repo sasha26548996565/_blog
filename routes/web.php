@@ -53,6 +53,8 @@ Route::namespace('App\Http\Controllers')->group(function () {
             Route::get('/', 'UserController@index')->name('index');
             Route::get('/create', 'UserController@create')->name('create');
             Route::post('/store/user', 'UserController@store')->name('store');
+            Route::delete('destroy/{user}', 'UserController@destroy')->name('destroy');
+            Route::post('restore/{user}', 'UserController@restore')->name('restore');
         });
     });
 });

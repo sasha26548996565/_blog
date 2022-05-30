@@ -16,12 +16,12 @@ class UserPolicy
         return $user->hasRole(User::ROLE_ADMIN);
     }
 
-    public function updatePost(User $user): bool
+    public function update(User $user): bool
     {
         return $user->hasPermissionTo(User::EDIT_PERMISSION);
     }
 
-    public function deletePost(User $user): bool
+    public function delete(User $user): bool
     {
         return $user->hasPermissionTo(User::DELETE_PERMISSION);
     }
